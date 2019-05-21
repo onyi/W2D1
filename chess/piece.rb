@@ -4,12 +4,17 @@ require_relative 'stepable.rb'
 
 class Piece
 
-  def initialize(letter = nil)
+  attr_reader :color
+  def initialize(letter = nil, color = :black)
     @display_letter = letter
   end
 
   def to_s
     @display_letter
+  end
+
+  def set_color(color)
+    @color = color
   end
 
 end

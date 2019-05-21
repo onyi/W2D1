@@ -17,10 +17,15 @@ class Board
     # Row 1 and 6: all pawn
     @grid[0] = [Rook.new(), Knight.new(), Bishop.new(), Queen.new(), King.new(), Bishop.new(), Knight.new(), Rook.new()]
     @grid[7] = [Rook.new(), Knight.new(), Bishop.new(), Queen.new(), King.new(), Bishop.new(), Knight.new(), Rook.new()]
-    pawns = []
-    8.times { pawns << Pawn.new() }
-    @grid[1] = pawns.dup
-    @grid[6] = pawns.dup
+    @grid[0].each { |piece| piece.set_color(:red) }
+    @grid[7].each { |piece| piece.set_color(:blue) }
+    pawns1, pawns2 = [], []
+    8.times { pawns1 << Pawn.new() }
+    8.times { pawns2 << Pawn.new() }
+    @grid[1] = pawns1
+    @grid[6] = pawns2
+    @grid[1].each { |piece| piece.set_color(:red) }
+    @grid[6].each { |piece| piece.set_color(:blue) }
     # @grid[1] = [Pawn.new(), Pawn.new(), Pawn.new(), Pawn.new(), Pawn.new(), Pawn.new(), Pawn.new(), Pawn.new()]
     # @grid[6] = [Pawn.new(), Pawn.new(), Pawn.new(), Pawn.new(), Pawn.new(), Pawn.new(), Pawn.new(), Pawn.new()]
     (2..5).each do |idx|

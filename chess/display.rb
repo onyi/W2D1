@@ -17,7 +17,7 @@ class Display
       rowstr = "#{idx + 1} "
       row.each do |ele|
         cur = ele.to_s
-        rowstr += cur.blue + " "
+        rowstr += cur.colorize(ele.color) + " "
       end
       puts rowstr
     end
