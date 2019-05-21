@@ -1,45 +1,81 @@
+require 'singleton'
+require_relative 'slideable.rb'
+require_relative 'stepable.rb'
+
 class Piece
 
-  def initialize
-    
+  def initialize(letter = nil)
+    @display_letter = letter
+  end
+
+  def to_s
+    @display_letter
   end
 
 end
 
-class NullPiece < Piece; end
+class NullPiece < Piece
+  include Singleton
+
+  def initialize
+    super("  ")
+  end
+
+end
 
 class Rook < Piece
-  def initialize
-    super
-  end
-end
+  include Slideable
 
-class Knight < Piece
   def initialize
-    super
+    super("RO")
   end
-end
 
-class Bishop < Piece
-  def initialize
-    super
+  def move_dirs
+
+  end
+
+  def moves
+
   end
 end
 
 class Queen < Piece
+  include Slideable
+
   def initialize
-    super
+    super("QU")
   end
 end
 
-class King < Piece
+class Knight < Piece
+  include Stepable
+
   def initialize
-    super
+    super("KN")
+  end
+end
+
+class Bishop < Piece
+  include Slideable
+
+  def initialize
+    super("BI")
+  end
+end
+
+
+
+class King < Piece
+  include Stepable
+  
+  def initialize
+    super("KI")
   end
 end
 
 class Pawn < Piece
   def initialize
-    super
+    super("PA")
   end
 end
+
