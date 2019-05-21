@@ -1,5 +1,6 @@
 require 'colorize'
 require_relative 'cursor.rb'
+require_relative 'board.rb'
 
 class Display
 
@@ -11,20 +12,19 @@ class Display
 
   def render
     # Render using colorize if @cursor.selected and at @cursor.current_pos
-    p "  1  2  3  4  5  6  7  8"
+    puts "  1  2  3  4  5  6  7  8"
     @board.grid.each_with_index do |row, idx|
       rowstr = "#{idx + 1} "
       row.each do |ele|
         cur = ele.to_s
-        rowstr += cur + " "
+        rowstr += cur.blue + " "
       end
-      p rowstr
+      puts rowstr
     end
 
   end
 
 end
 
-# d = Display.new
-# d.render
-# d.cursor.get_input
+x = Display.new
+p x.render
