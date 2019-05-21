@@ -1,3 +1,5 @@
+require_relative 'piece.rb'
+
 class InvalidMoveError < StandardError; end
 
 class Board
@@ -6,7 +8,13 @@ class Board
 
   def initialize
     @grid = Array.new(8) {Array.new(8)}
-    @grid[0][0] = 1
+    # @grid[0][0] = 1
+    # Row 0 and 7: rook, knight, bishop, queen, king, bishop, knight, and rook
+    # Row 1 and 6: all pawn
+    @grid[0] = [Rook.new(), Knight.new(), Bishop.new(), Queen.new(), King.new(), Bishop.new(), Knight.new(), Rook.new()]
+    @grid[7] = [Rook.new(), Knight.new(), Bishop.new(), Queen.new(), King.new(), Bishop.new(), Knight.new(), Rook.new()]
+    @grid[1] = [Pawn.new(), Pawn.new(), Pawn.new(), Pawn.new(), Pawn.new(), Pawn.new(), Pawn.new(), Pawn.new()]
+    @grid[6] = [Pawn.new(), Pawn.new(), Pawn.new(), Pawn.new(), Pawn.new(), Pawn.new(), Pawn.new(), Pawn.new()]
   end
 
   def move_piece(start_pos, end_pos)
@@ -31,4 +39,7 @@ class Board
 end
 
 example = Board.new
-example.move_piece([9,0], [1,1])
+p example.grid
+example.move_piece([0,0], [4,5])
+p example.grid
+# example.move_piece([9,0], [1,1])
