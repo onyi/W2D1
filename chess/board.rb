@@ -59,8 +59,9 @@ class Board
   end
 
   def valid_pos?(pos)
+    valid_positions = [0, 1, 2, 3, 4, 5, 6, 7]   # in our case, nil refers to an empty position
     raise InvalidPositionError "Invalid position. Please try again with correct value." if pos.length != 2
-    pos.any? {|position| !valid_positions.include?(position)}
+    pos.all? {|position| !valid_positions.include?(position)}
   end
 
 end

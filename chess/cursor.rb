@@ -32,7 +32,8 @@ MOVES = {
 
 class Cursor
 
-  attr_reader :cursor_pos, :board, :selected
+  attr_reader :board, :selected
+  attr_accessor :cursor_pos
 
   def initialize(cursor_pos, board)
     @cursor_pos = cursor_pos
@@ -82,8 +83,10 @@ class Cursor
     when :enter || :space
       toggle_selected
       p @cursor_pos
-    when :left || :right || :down || :up
-      update_pos(MOVE[key])
+    when :left 
+      #|| :right || :down || :up
+      puts MOVES[key]
+      update_pos(MOVES[key])
     when :ctrl_c
       Process.exit(0)
     end
@@ -91,8 +94,10 @@ class Cursor
   end
 
   def update_pos(diff)
-    [@cursor_pos, diff].transpose.map{ |x| x.reduce(:+) }
-    p @current_pos
+    new_pos = [@cursor_pos, diff].transpose.map{ |x| x.reduce(:+) }
+    puts "New Position: #{new_pos}"
+    @cursor_pos = new_pos if @board.valid_pos?(new_pos)
+    puts "Current Position: #{@cursor_pos}"
   end
   
 
