@@ -15,9 +15,9 @@ class Display
     puts "  1  2  3  4  5  6  7  8"
     @board.grid.each_with_index do |row, idx|
       rowstr = "#{idx + 1} "
-      row.each do |ele|
+      row.each_with_index do |ele, idx_2|
         cur = ele.to_s
-        rowstr += cur.colorize(ele.color) + " "
+        rowstr += @cursor.cursor_pos == [idx, idx_2] ? cur.colorize(ele.color).on_black + ' ' : cur.colorize(ele.color) + " "
       end
       puts rowstr
     end
@@ -28,3 +28,5 @@ end
 
 x = Display.new
 p x.render
+x.cursor.get_input
+x.render
